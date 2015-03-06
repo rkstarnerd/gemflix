@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Video.create(title: "Breaking Bad", description: "A chemistry teacher diagnosed with a terminal lung cancer, teams up with his former student, Jesse Pinkman, to cook and sell crystal meth.", small_cover_url: "/public/tmp/break_bad.jpg", large_cover_url: "break_bad_large.jpg")
+
+Video.create(title: "Sherlock", description: "A modern update finds the famous sleuth and his doctor partner solving crime in 21st century London.", small_cover_url: "/public/tmp/sherlock.jpg", large_cover_url: "sherlock_large.jpg")
+
+Video.create(title: "The Matrix", description: "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.", small_cover_url: "/public/tmp/the_matrix.jpg", large_cover_url: "the_matrix_large.jpg")
