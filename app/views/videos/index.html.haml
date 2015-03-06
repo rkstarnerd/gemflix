@@ -6,7 +6,7 @@
           TV Dramas
     %div{:class => "videos row"}
       - 2.times do 
-        - @videos.each do |video|
+        - @videos.shuffle.each do |video|
           %div{:class => "video col-sm-2"}
             %img{:src => "#{video.small_cover_url}", :width => "166", :height => "236"}
   %article.video_category
@@ -16,6 +16,6 @@
           Movie Dramas
     %div{:class => "videos row"}
       - 2.times do 
-        - @videos.each do |video|
+        - @videos.shuffle.each do |video|
           %div{:class => "video col-sm-2"}
             %img{:src => "#{video.small_cover_url}", :width => "166", :height => "236"}
