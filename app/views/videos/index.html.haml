@@ -8,7 +8,8 @@
       - 2.times do 
         - @videos.shuffle.each do |video|
           %div{:class => "video col-sm-2"}
-            %img{:src => "#{video.small_cover_url}", :width => "166", :height => "236"}
+            %a(href="#{video_path(video)}")
+              %img{:src => "#{video.small_cover_url}", :width => "166", :height => "236"}
   %article.video_category
     %header
       %h3
@@ -18,4 +19,5 @@
       - 2.times do 
         - @videos.shuffle.each do |video|
           %div{:class => "video col-sm-2"}
-            %img{:src => "#{video.small_cover_url}", :width => "166", :height => "236"}
+            %a(href="#{video_path(video)}")
+              %img{:src => "#{video.small_cover_url}", :width => "166", :height => "236"}
