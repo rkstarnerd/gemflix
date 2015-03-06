@@ -1,18 +1,21 @@
-%h1
-  %strong
-    TV Dramas
-%p
-%br
-- 2.times do 
-  - @videos.each do |video|
-    %img{:src => "#{video.small_cover_url}"}
-%p
-%br
-%h1
-  %strong
-    Movie Dramas
-%p
-%br
-- 2.times do 
-  - @videos.each do |video|
-    %img{:src => "#{video.small_cover_url}"}
+%section{:class => "content clearfix"}
+  %article.video_category
+    %header
+      %h3
+        %strong
+          TV Dramas
+    %div{:class => "videos row"}
+      - 2.times do 
+        - @videos.each do |video|
+          %div{:class => "video col-sm-2"}
+            %img{:src => "#{video.small_cover_url}", :width => "166", :height => "236"}
+  %article.video_category
+    %header
+      %h3
+        %strong
+          Movie Dramas
+    %div{:class => "videos row"}
+      - 2.times do 
+        - @videos.each do |video|
+          %div{:class => "video col-sm-2"}
+            %img{:src => "#{video.small_cover_url}", :width => "166", :height => "236"}
