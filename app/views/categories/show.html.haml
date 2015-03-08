@@ -1,0 +1,12 @@
+%section.content.clearfix
+  %section.genre
+    %header.clearfix
+      %h1
+        = @category.name.upcase
+      .genre_sorting
+    %article.row
+      - 3.times do
+        - @category.videos.each do |video|
+          %div{:class => "video col-sm-2"}
+            %a(href="#{video_path(video)}")
+              %img{:src => "#{video.small_cover_url}", :width => "166", :height => "236"}
