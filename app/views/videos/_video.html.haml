@@ -1,0 +1,4 @@
+- @category.videos.shuffle.each do |video|
+  .video.col-md-2
+    %a(href="#{video_path(video)}")
+      %img{:src => "#{video.small_cover_url}", :width => "166", :height => "236"}
