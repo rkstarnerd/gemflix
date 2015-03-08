@@ -1,8 +1,0 @@
-%article.video_category
-  %header
-    %h3
-      %strong
-        = link_to @category.name.upcase, category_path(@category)
-  .videos.row
-    - 3.times do 
-      = render 'video'
