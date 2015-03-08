@@ -10,3 +10,5 @@ Video.create(title: "Breaking Bad", description: "A chemistry teacher diagnosed 
 Video.create(title: "Sherlock", description: "A modern update finds the famous sleuth and his doctor partner solving crime in 21st century London.", small_cover_url: "/tmp/sherlock.jpg", large_cover_url: "/tmp/sherlock_large.jpg")
 
 Video.create(title: "The Matrix", description: "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.", small_cover_url: "/tmp/the_matrix.jpg", large_cover_url: "/tmp/the_matrix_large.jpg")
+
+Video.create(title: "The Dark Knight", description: "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, the caped crusader must come to terms with one of the greatest psychological tests of his ability to fight injustice.", small_cover_url: "/tmp/dark_knight.jpg", large_cover_url: "/tmp/dark_knight_large.jpg")
