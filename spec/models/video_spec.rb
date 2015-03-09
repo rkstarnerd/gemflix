@@ -8,11 +8,19 @@ describe Video do
   end
 
   it "has many categories through video_categories" do
-    sherlock = Video.create(id: 1, title: "sherlock")
+    sherlock = Video.create(id: 1, title: "sherlock", description: "sleuth")
     drama    = Category.create(id: 1, name: "drama")
     tv       = Category.create(id:2, name: "tv")
     video_category = VideoCategory.create(category_id: 1, video_id: 1)
     video_category = VideoCategory.create(category_id: 2, video_id: 1)
     expect(sherlock.categories).to include(drama, tv)
+  end
+
+  it "has a title" do
+    Video.new(title: "", description: "video description").should_not be_valid
+  end
+
+  it "has a description" do
+    Video.new(title: "Video Title", description: "").should_not be_valid
   end
 end
