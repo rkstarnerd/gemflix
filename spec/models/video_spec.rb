@@ -16,11 +16,11 @@ describe Video do
     expect(sherlock.categories).to include(drama, tv)
   end
 
-  it "has a title" do
+  it "requires a title" do
     Video.new(title: "", description: "video description").should_not be_valid
   end
 
-  it "has a description" do
+  it "requires a description" do
     Video.new(title: "Video Title", description: "").should_not be_valid
   end
 end
