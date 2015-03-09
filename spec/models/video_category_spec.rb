@@ -8,7 +8,7 @@ describe VideoCategory do
   end
 
   it "belongs to a video and category" do
-    sherlock = Video.create(id: 1, title: "Sherlock")
+    sherlock = Video.create(id: 1, title: "Sherlock", description: "sleuth")
     drama    = Category.create(id: 1, name: "drama")
     video_category = VideoCategory.create(category_id: 1, video_id: 1)
     expect(sherlock.video_categories).to include(video_category)
