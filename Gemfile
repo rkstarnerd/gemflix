@@ -20,6 +20,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'rspec-rails', '2.99'
+  gem 'shoulda-matchers', '~> 2.8.0'
 end
 
 group :test do
