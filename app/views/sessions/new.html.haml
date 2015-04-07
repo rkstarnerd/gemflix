@@ -8,15 +8,13 @@
         %fieldset
           .form-group
             = label_tag  :email,    'Email Address'
-          .row
-            .col-sm-4
-              = email_field_tag :email
-          %br
+            .row
+              .col-sm-4
+                = email_field_tag :email, nil, class: 'form-control'
           .form-group
             = label_tag  :password, 'Password'
-          .row
-            .col-sm-4
-              = password_field_tag :email, params[:password]
-          %br
+            .row
+              .col-sm-4
+                = password_field_tag :password, params[:password], class: 'form-control'
           %fieldset.form-group.action
-          = submit_tag 'Sign In', class: 'btn btn-default'
+          = submit_tag 'Sign In', class: 'btn btn-default', name: 'commit'
