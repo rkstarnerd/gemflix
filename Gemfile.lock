@@ -36,6 +36,7 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.1.1.1)
       sass (~> 3.2)
+    bootstrap_form (2.3.0)
     builder (3.2.2)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -127,9 +128,6 @@ GEM
       sprockets-rails (~> 2.0)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
-    simple_form (3.1.0)
-      actionpack (~> 4.0)
-      activemodel (~> 4.0)
     slop (3.4.7)
     sprockets (2.11.0)
       hike (~> 1.2)
@@ -164,6 +162,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass
+  bootstrap_form
   coffee-rails
   database_cleaner (= 1.2.0)
   haml-rails
@@ -176,6 +175,5 @@ DEPENDENCIES
   rspec-rails (= 2.99)
   sass-rails
   shoulda-matchers (~> 2.8.0)
-  simple_form
   thin
   uglifier
