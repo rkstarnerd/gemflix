@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe Category do
-    it { should have_many(:videos) }
+  it { should have_many(:videos) }
 
-    let(:drama) { Category.create(id: 1, name: "drama") }
+  let(:drama) { Category.create(id: 1, name: "drama") }
     
   describe "#recent_videos" do
     it "returns the videos in the reverse order by created at" do  
