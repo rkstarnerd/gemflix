@@ -1,20 +1,26 @@
 require 'spec_helper'
 
 describe VideosController do
-  describe "GET index" do
+
+  let(:sherlock) { Video.create(title: "Sherlock",   description: "sleuth") }
+  let(:matrix) { Video.create(title: "The Matrix", description: "the one") }
+
+  describe "GET show" do
+    it { should use_before_action(:require_user)   }
+
+    it "sets the @video variable" do
+    end
+    it "renders the show template" do
+    end
+  end
+
+  describe "GET search" do
     it { should use_before_action(:set_categories) }
     it { should use_before_action(:require_user)   }
 
     it "sets the @videos variable" do
-      sherlock = Video.create(title: "Sherlock",   description: "sleuth")
-      matrix   = Video.create(title: "The Matrix", description: "the one")
-      get :index
-      expect(assigns(:videos)).to eq([sherlock, matrix])
     end
-
-    it "renders the index template" do
-      get :index
-      expect(response).to render_template("index")
+    it "renders the search template" do
     end
   end
 end
