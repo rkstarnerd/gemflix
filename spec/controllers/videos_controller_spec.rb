@@ -29,7 +29,8 @@ describe VideosController do
     end
 
     it "does not render the search template when the user is not logged in" do
-      get :search
+      sherlock = Fabricate(:video, title: 'Sherlock', description: 'sleuth')
+      post :search, search_term: 'lock'
       expect(response).to redirect_to signin_path
     end
   end
