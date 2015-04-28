@@ -12,6 +12,8 @@ gem 'pg'
 gem 'bootstrap_form'
 gem 'bcrypt'
 gem 'bcrypt-ruby'
+gem 'fabrication', '~> 2.13.1'
+gem 'faker', '~> 1.4.3'
 
 group :development do
   gem 'thin'
@@ -28,8 +30,6 @@ end
 group :test do
   gem 'database_cleaner', '1.2.0'
   gem 'shoulda-matchers', '~> 2.8.0'
-  gem 'fabricator', '~> 0.0.5'
-  gem 'faker', '~> 1.4.3'
 end
 
 group :production do
