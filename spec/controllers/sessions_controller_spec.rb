@@ -15,6 +15,11 @@ describe SessionsController do
 
   describe "POST create" do
     context "with valid credentials" do
+      before do
+        alice = Fabricate(:user)
+        post :create, email: alice.email, password: alice.password
+      end
+
       it "puts the signed in user in the session" do
         alice = Fabricate(:user)
         post :create, email: alice.email, password: alice.password
@@ -22,52 +27,48 @@ describe SessionsController do
       end
 
       it "redirects to the home path" do
-        alice = Fabricate(:user)
-        post :create, email: alice.email, password: alice.password
         expect(response).to redirect_to home_path
       end
 
       it "sets the notice" do
-        alice = Fabricate(:user)
-        post :create, email: alice.email, password: alice.password
         expect(flash[:notice]).not_to be_blank
       end
     end
 
     context "with invalid credentials" do
-      it "does not put the signed in user in the session" do
+      before do
         alice = Fabricate(:user)
         post :create, email: alice.email
+      end
+
+      it "does not put the signed in user in the session" do
         expect(session[:user_id]).to eq(nil)
       end
       it "sets the error" do
-        alice = Fabricate(:user)
-        post :create, email: alice.email
         expect(flash[:error]).not_to be_blank
       end
 
       it "redirects to signin path" do
-        alice = Fabricate(:user)
-        post :create, email: alice.email
         expect(response).to redirect_to signin_path
       end
     end
   end
 
   describe "GET destroy" do
-    it "clears the session for the user" do
+    before do
       session[:user_id] = Fabricate(:user).id
       get :destroy
+    end
+
+    it "clears the session for the user" do
       expect(session[:user_id]).to eq(nil)
     end
+
     it "redirects to the root path" do
-      session[:user_id] = Fabricate(:user).id
-      get :destroy
       expect(response).to redirect_to root_path
     end
+
     it "sets the notice" do
-      session[:user_id] = Fabricate(:user).id
-      get :destroy
       expect(flash[:notice]).not_to be_blank
     end
   end
