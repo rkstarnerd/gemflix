@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe SessionsController do
   describe "GET new" do
-    it "renders the new template for unauthenticated users" do
-      get :new
-      expect(response).to render_template :new
-    end
+    before { get :new }
+
+    it { should render_template('new') }
+
     it "redirects to the home page for authenticated users" do
       session[:user_id] = Fabricate(:user).id
       get :new
@@ -26,13 +26,9 @@ describe SessionsController do
         expect(session[:user_id]).to eq(alice.id)
       end
 
-      it "redirects to the home path" do
-        expect(response).to redirect_to home_path
-      end
+      it { should redirect_to home_path }
 
-      it "sets the notice" do
-        expect(flash[:notice]).not_to be_blank
-      end
+      it { should set_flash }
     end
 
     context "with invalid credentials" do
@@ -41,16 +37,11 @@ describe SessionsController do
         post :create, email: alice.email
       end
 
-      it "does not put the signed in user in the session" do
-        expect(session[:user_id]).to eq(nil)
-      end
-      it "sets the error" do
-        expect(flash[:error]).not_to be_blank
-      end
+      it { should set_session }
 
-      it "redirects to signin path" do
-        expect(response).to redirect_to signin_path
-      end
+      it { should set_flash }
+
+      it { should redirect_to signin_path }
     end
   end
 
@@ -64,12 +55,8 @@ describe SessionsController do
       expect(session[:user_id]).to eq(nil)
     end
 
-    it "redirects to the root path" do
-      expect(response).to redirect_to root_path
-    end
+    it { should redirect_to root_path }
 
-    it "sets the notice" do
-      expect(flash[:notice]).not_to be_blank
-    end
+    it { should set_flash }
   end
 end
