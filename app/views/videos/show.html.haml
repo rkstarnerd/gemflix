@@ -9,7 +9,7 @@
             %h3
               = @video.title
             %span
-              Rating:
+              Rating: #{Review.average_rating(@video)}
           %p
             = @video.description
           .actions
