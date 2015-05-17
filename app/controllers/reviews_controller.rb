@@ -3,4 +3,3 @@ class Reviews < ApplicationController
     @review = Review.new
   end
 end
-
