@@ -15,3 +15,4 @@ Video.create(title: "The Dark Knight", description: "When the menace known as th
 
 gemille  = User.create(name: "Gemille Ford", password: "password", email: "gemille@example.com")
 Review.create(user_id: gemille.id, video_id: 2, rating: 4, description: "This is an excellent whodunit. Instant classic. Looking forward to next season!")
+Review.create(user_id: gemille.id, video_id: 2, rating: 3, description: "There is just too much time in between seasons. Womp!")
