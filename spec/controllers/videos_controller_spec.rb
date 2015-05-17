@@ -16,7 +16,7 @@ describe VideosController do
       expect(assigns(:video)).to eq(video)
     end
 
-    it "sets the @review variable when user is logged in" do
+    it "sets the @reviews variable when user is logged in" do
       session[:user_id] = Fabricate(:user).id
       video = Fabricate(:video)
       review1 = Fabricate(:review, video: video)
