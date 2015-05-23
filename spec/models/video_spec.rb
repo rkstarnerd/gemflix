@@ -4,6 +4,7 @@ describe Video do
   it { should have_many(:categories) }
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:description) }
+  it { should have_many(:reviews).order("created_at DESC")}
 
   let(:sherlock) { Video.create(title: "Sherlock", description: "sleuth") }
   let(:sherlock_bad) { Video.create(title: "Sherlock Bad", description: "sleuth", created_at: 1.day.ago) }
