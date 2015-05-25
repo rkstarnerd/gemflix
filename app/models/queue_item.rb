@@ -14,4 +14,9 @@ class QueueItem < ActiveRecord::Base
       nil
     end
   end
+
+  def category_name
+    category_names = video.categories.map { |category| category.name }
+    category_names.join(" ")
+  end
 end
