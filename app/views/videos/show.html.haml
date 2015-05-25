@@ -13,10 +13,8 @@
           %p
             = @video.description
           .actions
-            %a.btn.btn-primary
-              Watch Now
-            %a.btn.btn-default
-              + My Queue
+            = link_to "Watch Now", "#", method: :post, class: 'a btn btn-primary'
+            = link_to "+ My Queue", queue_items_path, method: :post, class: 'a btn btn-default'
 %section.reviews.container
   %section.reviews.container
   .row
