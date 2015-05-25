@@ -11,5 +11,30 @@ describe QueueItem do
       expect(queue_item.video_title).to eq('Sherlock')
     end
   end
-  
+
+  describe "#rating" do
+    it "returns the rating from the review when the review is present" do
+      video = Fabricate(:video)
+      user  = Fabricate(:user)
+      review = Fabricate(:review, user: user, video: video, rating: 4)
+      queue_item = Fabricate(:queue_item, video: video, user: user)
+      expect(queue_item.rating).to eq(4)
+    end
+    it "returns nil when the review is not present" do
+      video = Fabricate(:video)
+      user  = Fabricate(:user)
+      queue_item = Fabricate(:queue_item, video: video, user: user)
+      expect(queue_item.rating).to eq(nil)
+    end
+  end
+
+  describe "#category_name" do
+    it "returns the category name of the associated video" do
+      category = Fabricate(:category, name: 'drama')
+      video = Fabricate(:video, category: category)
+      queue_item = Fabricate(:queue_item, video: video)
+      expect(queue_item.category_name).to eq('drama')
+    end
+
+  end
 end
