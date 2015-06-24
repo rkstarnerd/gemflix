@@ -20,7 +20,7 @@ class QueueItemsController < ApplicationController
   end
 
   def update_queue
-    
+    redirect_to my_queue_path
   end
 
   private
