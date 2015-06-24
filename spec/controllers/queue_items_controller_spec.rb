@@ -104,6 +104,23 @@ describe QueueItemsController do
       delete :destroy, id: queue_item.id
       expect(response).to redirect_to('/signin')
     end
+  end
 
+  describe "POST update_queue" do
+    context "with valid inputs" do
+      it "redirects to the my queue page" do
+        user = Fabricate(:user)
+        session[:user_id] = user.id
+        queue_item1 = Fabricate(:queue_item, user: user, position: 1)
+        queue_item2 = Fabricate(:queue_item, user: user, position: 2)
+        post :update_queue, queue_items: [{id: queue_item1.id, position: 2}, {id: queue_item2.id, position: 1}]
+        expect(response).to redirect_to my_queue_path
+      end
+      it "reorders the queue items"
+      it "normalizes the position numbers"
+    end
+    context "with invalid inputs"
+    context "with unauthenticated users"    
+    context "with queue items that do not belong to the current user"
   end
 end
