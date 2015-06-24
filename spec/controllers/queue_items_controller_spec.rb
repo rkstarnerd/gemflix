@@ -126,7 +126,14 @@ describe QueueItemsController do
         expect(user.queue_items).to eq([queue_item2, queue_item1])
       end
 
-      it "normalizes the position numbers"
+      it "normalizes the position numbers" do
+        user = Fabricate(:user)
+        session[:user_id] = user.id
+        queue_item1 = Fabricate(:queue_item, user: user, position: 1)
+        queue_item2 = Fabricate(:queue_item, user: user, position: 2)
+        post :update_queue, queue_items: [{id: queue_item1.id, position: 3}, {id: queue_item2.id, position: 2}]
+        expect(user.queue_items.map(&:position)).to eq([1, 2])
+      end
     end
     context "with invalid inputs"
     context "with unauthenticated users"    
