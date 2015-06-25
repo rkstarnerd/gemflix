@@ -167,9 +167,7 @@ describe QueueItemsController do
 
     context "with unauthenticated users" do
       it "redirects to the sign in path" do
-        queue_item1 = Fabricate(:queue_item, position: 1)
-        queue_item2 = Fabricate(:queue_item, position: 2)
-        post :update_queue, queue_items: [{id: queue_item1.id, position: 2}, {id: queue_item2.id, position: 1}]
+        post :update_queue, queue_items: [{id: 1, position: 2}, {id: 2, position: 1}]
         expect(response).to redirect_to signin_path
       end
     end
