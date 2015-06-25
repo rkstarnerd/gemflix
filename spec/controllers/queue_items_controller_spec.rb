@@ -172,6 +172,16 @@ describe QueueItemsController do
       end
     end
 
-    context "with queue items that do not belong to the current user"
+    context "with queue items that do not belong to the current user" do 
+      it "does not change the queue items" do
+        user  = Fabricate(:user)
+        user1 = Fabricate(:user)
+        session[:user_id] = user.id
+        queue_item1 = Fabricate(:queue_item, user: user1, position: 1)
+        queue_item2 = Fabricate(:queue_item, user: user, position: 2)
+        post :update_queue, queue_items: [{id: queue_item1.id, position: 2}, {id: queue_item2.id, position: 1}]
+        expect(queue_item1.reload.position).to eq(1)
+      end
+    end
   end
 end
