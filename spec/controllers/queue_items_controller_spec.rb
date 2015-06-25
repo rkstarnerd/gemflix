@@ -135,7 +135,21 @@ describe QueueItemsController do
         expect(user.queue_items.map(&:position)).to eq([1, 2])
       end
     end
-    context "with invalid inputs"
+
+    context "with invalid inputs" do
+      it "redirects to the my queue page" do
+        user = Fabricate(:user)
+        session[:user_id] = user.id
+        queue_item1 = Fabricate(:queue_item, user: user, position: 1)
+        queue_item2 = Fabricate(:queue_item, user: user, position: 2)
+        post :update_queue, queue_items: [{id: queue_item1.id, position: 2.5}, {id: queue_item2.id, position: 1}]
+        expect(response).to redirect_to my_queue_path
+      end
+
+      it "sets the flash error message"
+      it "does not change the queue items"
+    end
+
     context "with unauthenticated users"    
     context "with queue items that do not belong to the current user"
   end
