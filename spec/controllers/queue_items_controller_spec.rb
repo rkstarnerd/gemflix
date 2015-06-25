@@ -160,8 +160,8 @@ describe QueueItemsController do
         session[:user_id] = user.id
         queue_item1 = Fabricate(:queue_item, user: user, position: 1)
         queue_item2 = Fabricate(:queue_item, user: user, position: 2)
-        post :update_queue, queue_items: [{id: queue_item1.id, position: 2.5}, {id: queue_item2.id, position: 1}]
-        expect(user.queue_items).to eq([queue_item1, queue_item2])
+        post :update_queue, queue_items: [{id: queue_item1.id, position: 3}, {id: queue_item2.id, position: 2.1}]
+        expect(queue_item1.reload.position).to eq(1)
       end
     end
 
