@@ -146,7 +146,15 @@ describe QueueItemsController do
         expect(response).to redirect_to my_queue_path
       end
 
-      it "sets the flash error message"
+      it "sets the flash error message" do
+        user = Fabricate(:user)
+        session[:user_id] = user.id
+        queue_item1 = Fabricate(:queue_item, user: user, position: 1)
+        queue_item2 = Fabricate(:queue_item, user: user, position: 2)
+        post :update_queue, queue_items: [{id: queue_item1.id, position: 2.5}, {id: queue_item2.id, position: 1}]
+        expect(flash[:error]).to be_present
+      end
+
       it "does not change the queue items"
     end
 
