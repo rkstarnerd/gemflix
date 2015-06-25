@@ -155,7 +155,14 @@ describe QueueItemsController do
         expect(flash[:error]).to be_present
       end
 
-      it "does not change the queue items"
+      it "does not change the queue items" do
+        user = Fabricate(:user)
+        session[:user_id] = user.id
+        queue_item1 = Fabricate(:queue_item, user: user, position: 1)
+        queue_item2 = Fabricate(:queue_item, user: user, position: 2)
+        post :update_queue, queue_items: [{id: queue_item1.id, position: 2.5}, {id: queue_item2.id, position: 1}]
+        expect(user.queue_items).to eq([queue_item1, queue_item2])
+      end
     end
 
     context "with unauthenticated users"    
