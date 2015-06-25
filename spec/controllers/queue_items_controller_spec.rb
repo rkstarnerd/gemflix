@@ -104,6 +104,15 @@ describe QueueItemsController do
       delete :destroy, id: queue_item.id
       expect(response).to redirect_to('/signin')
     end
+
+    it "normalizes the remaining queue items" do
+      user = Fabricate(:user)
+      session[:user_id] = user.id
+      queue_item1 = Fabricate(:queue_item, user: user, position: 1)
+      queue_item2 = Fabricate(:queue_item, user: user, position: 2)
+      delete :destroy, id: queue_item1.id
+      expect(QueueItem.first.position).to eq(1)
+    end
   end
 
   describe "POST update_queue" do
