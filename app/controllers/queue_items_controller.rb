@@ -22,7 +22,11 @@ class QueueItemsController < ApplicationController
   def update_queue
     params[:queue_items].each do |queue_item_data|
       queue_item = QueueItem.find(queue_item_data["id"])
-      queue_item.update_attributes(position: queue_item_data["position"])
+      if !queue_item.update_attributes(position: queue_item_data["position"])
+        flash[:error] = "Invalid position numbers."
+        redirect_to my_queue_path
+        return
+      end
     end
 
     current_user.queue_items.each_with_index do |queue_item, index|
