@@ -15,6 +15,10 @@ class QueueItem < ActiveRecord::Base
     end
   end
 
+  def rating=(new_rating)
+    
+  end
+
   def category_name
     category_names = video.categories.map { |category| category.name }
     category_names.join(" ")
