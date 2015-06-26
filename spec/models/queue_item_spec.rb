@@ -48,7 +48,13 @@ describe QueueItem do
       expect(Review.first.rating).to be_nil
     end
 
-    it "creates the review with the rating if the review is not present"
+    it "creates the review with the rating if the review is not present" do
+      video  = Fabricate(:video)
+      user   = Fabricate(:user)
+      queue_item = Fabricate(:queue_item, user: user, video: video)
+      queue_item.rating = 3
+      expect(Review.first.rating).to eq(3)
+    end
   end
 
   describe "#category_name" do
