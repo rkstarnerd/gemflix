@@ -24,7 +24,7 @@
           .form-group
             %label Rate this video
             %br
-            = f.select :rating, options_for_select([5, 4, 3, 2, 1].map { |num| [pluralize(num, "Star"), num] })
+            = f.select :rating, options_for_video_reviews
             %br
             %br
             %label Write Review
