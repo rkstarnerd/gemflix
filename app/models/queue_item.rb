@@ -13,7 +13,7 @@ class QueueItem < ActiveRecord::Base
 
   def rating=(new_rating)
     review = Review.where(user_id: user.id, video_id: video.id).first
-    review.update_attributes(rating: new_rating)
+    review.update_column(:rating, new_rating)
   end
 
   def category_name
