@@ -24,7 +24,6 @@ describe SessionsController do
       end
 
       it { should redirect_to home_path }
-
       it { should set_flash }
     end
 
@@ -32,9 +31,7 @@ describe SessionsController do
       before { create_invalid_user }
 
       it { should set_session }
-
       it { should set_flash }
-
       it { should redirect_to signin_path }
     end
   end
@@ -47,7 +44,6 @@ describe SessionsController do
     end
 
     it { should redirect_to root_path }
-
     it { should set_flash }
   end
 end

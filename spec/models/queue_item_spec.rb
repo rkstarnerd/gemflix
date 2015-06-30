@@ -21,6 +21,7 @@ describe QueueItem do
       queue_item = Fabricate(:queue_item, video: video, user: user)
       expect(queue_item.rating).to eq(4)
     end
+    
     it "returns nil when the review is not present" do
       video = Fabricate(:video)
       user  = Fabricate(:user)
