@@ -4,10 +4,7 @@ describe VideosController do
   it { should use_before_action(:require_user)   }
 
   describe "GET show" do
-    before do 
-      video = Fabricate(:video)
-      get :show, id: video.id
-    end
+    before { set_video }
 
     it "sets the @video variable when user is logged in" do
       session[:user_id] = Fabricate(:user).id

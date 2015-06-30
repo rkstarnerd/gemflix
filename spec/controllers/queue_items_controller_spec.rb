@@ -122,9 +122,7 @@ describe QueueItemsController do
       let(:queue_item1) { Fabricate(:queue_item, user: user, video: video, position: 1) }
       let(:queue_item2) { Fabricate(:queue_item, user: user, video: video, position: 2) }
     
-      before do
-        session[:user_id] = user.id
-      end
+      before { session[:user_id] = user.id }
 
       it "redirects to the my queue page" do
         post :update_queue, queue_items: [{id: queue_item1.id, position: 2}, {id: queue_item2.id, position: 1}]
@@ -148,9 +146,7 @@ describe QueueItemsController do
       let(:queue_item1) { Fabricate(:queue_item, user: user, video: video, position: 1) }
       let(:queue_item2) { Fabricate(:queue_item, user: user, video: video, position: 2) }
     
-      before do
-        session[:user_id] = user.id
-      end
+      before { session[:user_id] = user.id }
 
       it "redirects to the my queue page" do
         post :update_queue, queue_items: [{id: queue_item1.id, position: 2.5}, {id: queue_item2.id, position: 1}]
