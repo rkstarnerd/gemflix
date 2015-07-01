@@ -31,7 +31,7 @@ describe QueueItemsController do
       expect(QueueItem.count).to eq(1)
     end
 
-    it "the queue item that is associated with the video" do
+    it "it creates the queue item that is associated with the video" do
       set_current_user
       video = Fabricate(:video)
       post :create, video_id: video.id
