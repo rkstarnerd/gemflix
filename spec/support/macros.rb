@@ -21,3 +21,7 @@ def set_video
   video = Fabricate(:video)
   get :show, id: video.id
 end
+
+def create_video
+  Video.create(title: "foo", description: "bar")
+end
