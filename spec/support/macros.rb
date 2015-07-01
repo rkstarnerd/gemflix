@@ -1,3 +1,7 @@
+def set_current_user(user=nil)
+  session[:user_id]  = (user || Fabricate(:user)).id
+end
+
 def create_valid_user
   alice = Fabricate(:user)
   post :create, email: alice.email, password: alice.password
