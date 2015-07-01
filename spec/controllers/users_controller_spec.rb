@@ -13,7 +13,7 @@ describe UsersController do
       before { post :create, user: Fabricate.attributes_for(:user) }
 
       it "creates the user" do
-        #expect(User.count).to eq(1)
+        expect(User.count).to eq(1)
       end
 
       it { should redirect_to signin_path }
@@ -23,7 +23,7 @@ describe UsersController do
       before { post :create, user: {email: "gemille@example.com"} }
 
       it "does not create the user" do
-        #expect(User.count).to eq(0)
+        expect(User.count).to eq(0)
       end
 
       it { should render_template('new') }

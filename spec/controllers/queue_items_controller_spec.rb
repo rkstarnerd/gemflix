@@ -11,9 +11,8 @@ describe QueueItemsController do
       expect(assigns(:queue_items)).to match_array([queue_item1, queue_item2])
     end
 
-    it "redirects to the signin page for unauthenticated users" do
-      get :index
-      expect(response).to redirect_to('/signin')
+    it_behaves_like "requires sign in" do
+        let(:action) { get :index }
     end
   end
 
@@ -67,10 +66,9 @@ describe QueueItemsController do
       expect(user.queue_items.count).to eq(1)
     end
 
-    it "redirects to the sign in page for unauthenticated users" do
-      video = Fabricate(:video)
-      post :create, video_id: video.id
-      expect(response).to redirect_to('/signin')
+    it_behaves_like "requires sign in" do
+      let(:video)  { video  = Fabricate(:video) }
+      let(:action) {  post :create, video_id: video.id }
     end
   end
 
@@ -99,10 +97,9 @@ describe QueueItemsController do
       expect(QueueItem.count).to eq(1)
     end
     
-    it "redirects to the sign in page for unauthenticated users" do
-      queue_item = Fabricate(:queue_item)
-      delete :destroy, id: queue_item.id
-      expect(response).to redirect_to('/signin')
+    it_behaves_like "requires sign in" do
+       let(:queue_item) {  Fabricate(:queue_item) }
+       let(:action)     { delete :destroy, id: queue_item.id}
     end
 
     it "normalizes the remaining queue items" do
@@ -117,7 +114,7 @@ describe QueueItemsController do
 
   describe "POST update_queue" do
     context "with valid inputs" do
-      let(:video) { video  = Fabricate(:video) } 
+      let(:video) { video  = Fabricate(:video) }
       let(:user) { Fabricate(:user) }
       let(:queue_item1) { Fabricate(:queue_item, user: user, video: video, position: 1) }
       let(:queue_item2) { Fabricate(:queue_item, user: user, video: video, position: 2) }
@@ -165,9 +162,8 @@ describe QueueItemsController do
     end
 
     context "with unauthenticated users" do
-      it "redirects to the sign in path" do
-        post :update_queue, queue_items: [{id: 1, position: 2}, {id: 2, position: 1}]
-        expect(response).to redirect_to signin_path
+      it_behaves_like "requires sign in" do
+        let(:action) { post :update_queue, queue_items: [{id: 1, position: 2}, {id: 2, position: 1}] }
       end
     end
 

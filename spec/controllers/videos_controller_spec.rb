@@ -35,10 +35,9 @@ describe VideosController do
       expect(assigns(:videos)).to eq([sherlock])
     end
 
-    it "does not render the search template when the user is not logged in" do
-      sherlock = Fabricate(:video, title: 'Sherlock', description: 'sleuth')
-      post :search, search_term: 'lock'
-      expect(response).to redirect_to signin_path
+    it_behaves_like "requires sign in" do
+      let(:sherlock) { Fabricate(:video, title: 'Sherlock', description: 'sleuth') }
+      let(:action) { post :search, search_term: 'lock' } 
     end
   end
 end
