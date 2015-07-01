@@ -18,7 +18,7 @@ describe Category do
     end
 
     it "returns all of the videos if there are less than 6 videos" do
-      2.times { Video.create(title: "foo", description: "bar") }    
+      2.times { create_video }    
       Video.all.each do |video| 
         VideoCategory.create(video_id: video.id, category_id: 1)
       end
@@ -26,7 +26,7 @@ describe Category do
     end
 
     it "returns 6 videos if there are more than 6 videos" do
-      7.times { Video.create(title: "foo", description: "bar") }
+      7.times { create_video }
       Video.all.each do |video| 
         VideoCategory.create(video_id: video.id, category_id: 1)
       end
@@ -34,7 +34,7 @@ describe Category do
     end
 
     it "returns the most recent 6 videos" do 
-      6.times { Video.create(title: "foo", description: "bar") }
+      6.times { create_video }
       movies = Video.all.each do |video| 
         VideoCategory.create(video_id: video.id, category_id: 1)
       end
