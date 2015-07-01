@@ -7,14 +7,14 @@ describe VideosController do
     before { set_video }
 
     it "sets the @video variable when user is logged in" do
-      session[:user_id] = Fabricate(:user).id
+      set_current_user
       video = Fabricate(:video)
       get :show, id: video.id
       expect(assigns(:video)).to eq(video)
     end
 
     it "sets the @reviews variable when user is logged in" do
-      session[:user_id] = Fabricate(:user).id
+      set_current_user
       video = Fabricate(:video)
       review1 = Fabricate(:review, video: video)
       review2 = Fabricate(:review, video: video)
@@ -29,7 +29,7 @@ describe VideosController do
     it { should use_before_action(:set_categories) }
 
     it "sets the @videos variable when user is logged in" do
-      session[:user_id] = Fabricate(:user).id
+      set_current_user
       sherlock = Fabricate(:video, title: 'Sherlock', description: 'sleuth')
       post :search, search_term: 'lock'
       expect(assigns(:videos)).to eq([sherlock])

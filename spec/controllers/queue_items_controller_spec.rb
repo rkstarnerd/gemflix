@@ -4,7 +4,7 @@ describe QueueItemsController do
   describe "GET index" do
     it "sets @queue_items to the queue_items of the logged in user" do
       alice = Fabricate(:user)
-      session[:user_id] = alice.id
+      set_current_user(alice)
       queue_item1 = Fabricate(:queue_item, user: alice)
       queue_item2 = Fabricate(:queue_item, user: alice)
       get :index
@@ -19,21 +19,21 @@ describe QueueItemsController do
 
   describe "POST create" do
     it "redirects to the my queue page" do
-      session[:user_id] = Fabricate(:user)
+      set_current_user
       video = Fabricate(:video)
       post :create, video_id: video.id
       expect(response).to redirect_to my_queue_path
     end
 
     it "creates queue_item" do
-      session[:user_id] = Fabricate(:user)
+      set_current_user
       video = Fabricate(:video)
       post :create, video_id: video.id
       expect(QueueItem.count).to eq(1)
     end
 
     it "the queue item that is associated with the video" do
-      session[:user_id] = Fabricate(:user)
+      set_current_user
       video = Fabricate(:video)
       post :create, video_id: video.id
       expect(QueueItem.first.video).to eq(video)
@@ -41,7 +41,7 @@ describe QueueItemsController do
 
     it "creates the queue item that is associated with the signed in user" do
       user = Fabricate(:user)
-      session[:user_id] = user
+      set_current_user(user)
       video = Fabricate(:video)
       post :create, video_id: video.id
       expect(QueueItem.first.user).to eq(user)
@@ -49,7 +49,7 @@ describe QueueItemsController do
 
     it "puts the video as the last one in the queue" do
       user = Fabricate(:user)
-      session[:user_id] = user
+      set_current_user(user)
       video = Fabricate(:video)
       Fabricate(:queue_item, video: video, user: user)
       video2 = Fabricate(:video)
@@ -60,7 +60,7 @@ describe QueueItemsController do
 
     it "does not add the video to the queue if it is already in the queue" do
       user = Fabricate(:user)
-      session[:user_id] = user
+      set_current_user(user)
       video = Fabricate(:video)
       Fabricate(:queue_item, video: video, user: user)
       post :create, video_id: video.id
@@ -76,7 +76,7 @@ describe QueueItemsController do
 
   describe "DELETE destroy" do
     it "redirect_to my_queue_path" do
-      session[:user_id] = Fabricate(:user)
+      set_current_user
       queue_item = Fabricate(:queue_item)
       delete :destroy, id: queue_item.id
       expect(response).to redirect_to(my_queue_path)
@@ -84,7 +84,7 @@ describe QueueItemsController do
 
     it "removes the item from the queue" do
       user = Fabricate(:user)
-      session[:user_id] = user.id
+      set_current_user(user)
       queue_item = Fabricate(:queue_item, user: user)
       delete :destroy, id: queue_item.id
       expect(QueueItem.count).to eq(0)
@@ -93,7 +93,7 @@ describe QueueItemsController do
     it "does not delete the queue item if the queue_item is not in the current user's queue" do
       user  = Fabricate(:user)
       user2 = Fabricate(:user)
-      session[:user_id] = user.id
+      set_current_user(user)
       queue_item = Fabricate(:queue_item, user: user2)
       delete :destroy, id: queue_item.id
       expect(QueueItem.count).to eq(1)
@@ -107,7 +107,7 @@ describe QueueItemsController do
 
     it "normalizes the remaining queue items" do
       user = Fabricate(:user)
-      session[:user_id] = user.id
+      set_current_user(user)
       queue_item1 = Fabricate(:queue_item, user: user, position: 1)
       queue_item2 = Fabricate(:queue_item, user: user, position: 2)
       delete :destroy, id: queue_item1.id
@@ -122,7 +122,7 @@ describe QueueItemsController do
       let(:queue_item1) { Fabricate(:queue_item, user: user, video: video, position: 1) }
       let(:queue_item2) { Fabricate(:queue_item, user: user, video: video, position: 2) }
     
-      before { session[:user_id] = user.id }
+      before { set_current_user(user) }
 
       it "redirects to the my queue page" do
         post :update_queue, queue_items: [{id: queue_item1.id, position: 2}, {id: queue_item2.id, position: 1}]
@@ -146,7 +146,7 @@ describe QueueItemsController do
       let(:queue_item1) { Fabricate(:queue_item, user: user, video: video, position: 1) }
       let(:queue_item2) { Fabricate(:queue_item, user: user, video: video, position: 2) }
     
-      before { session[:user_id] = user.id }
+      before { set_current_user(user) }
 
       it "redirects to the my queue page" do
         post :update_queue, queue_items: [{id: queue_item1.id, position: 2.5}, {id: queue_item2.id, position: 1}]
@@ -175,7 +175,7 @@ describe QueueItemsController do
       it "does not change the queue items" do
         user  = Fabricate(:user)
         user1 = Fabricate(:user)
-        session[:user_id] = user.id
+        set_current_user(user)
         video  = Fabricate(:video)
         video2 = Fabricate(:video)
         queue_item1 = Fabricate(:queue_item, user: user1, video: video, position: 1)
