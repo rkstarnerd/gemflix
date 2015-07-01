@@ -17,11 +17,9 @@ describe QueueItemsController do
   end
 
   describe "POST create" do
-    it "redirects to the my queue page" do
-      set_current_user
-      video = Fabricate(:video)
-      post :create, video_id: video.id
-      expect(response).to redirect_to my_queue_path
+    it_behaves_like "redirects to my_queue_path" do
+      let(:video)  { Fabricate(:video) }
+      let(:action) { post :create, video_id: video.id }
     end
 
     it "creates queue_item" do
@@ -68,16 +66,14 @@ describe QueueItemsController do
 
     it_behaves_like "requires sign in" do
       let(:video)  { video  = Fabricate(:video) }
-      let(:action) {  post :create, video_id: video.id }
+      let(:action) { post :create, video_id: video.id }
     end
   end
 
   describe "DELETE destroy" do
-    it "redirect_to my_queue_path" do
-      set_current_user
-      queue_item = Fabricate(:queue_item)
-      delete :destroy, id: queue_item.id
-      expect(response).to redirect_to(my_queue_path)
+    it_behaves_like "redirects to my_queue_path" do
+      let(:queue_item) { Fabricate(:queue_item) }
+      let(:action)     { delete :destroy, id: queue_item.id }
     end
 
     it "removes the item from the queue" do
@@ -114,16 +110,15 @@ describe QueueItemsController do
 
   describe "POST update_queue" do
     context "with valid inputs" do
-      let(:video) { video  = Fabricate(:video) }
-      let(:user) { Fabricate(:user) }
+      let(:video) { Fabricate(:video) }
+      let(:user)  { Fabricate(:user) }
       let(:queue_item1) { Fabricate(:queue_item, user: user, video: video, position: 1) }
       let(:queue_item2) { Fabricate(:queue_item, user: user, video: video, position: 2) }
     
       before { set_current_user(user) }
 
-      it "redirects to the my queue page" do
-        post :update_queue, queue_items: [{id: queue_item1.id, position: 2}, {id: queue_item2.id, position: 1}]
-        expect(response).to redirect_to my_queue_path
+      it_behaves_like "redirects to my_queue_path" do
+        let(:action) { post :update_queue, queue_items: [{id: queue_item1.id, position: 2}, {id: queue_item2.id, position: 1}] }
       end
 
       it "reorders the queue items" do
@@ -138,16 +133,15 @@ describe QueueItemsController do
     end
 
     context "with invalid inputs" do
-      let(:video) { video  = Fabricate(:video) } 
-      let(:user) { Fabricate(:user) }
+      let(:video) { Fabricate(:video) } 
+      let(:user)  { Fabricate(:user) }
       let(:queue_item1) { Fabricate(:queue_item, user: user, video: video, position: 1) }
       let(:queue_item2) { Fabricate(:queue_item, user: user, video: video, position: 2) }
     
       before { set_current_user(user) }
 
-      it "redirects to the my queue page" do
-        post :update_queue, queue_items: [{id: queue_item1.id, position: 2.5}, {id: queue_item2.id, position: 1}]
-        expect(response).to redirect_to my_queue_path
+      it_behaves_like "redirects to my_queue_path" do
+        let(:action) { post :update_queue, queue_items: [{id: queue_item1.id, position: 2.5}, {id: queue_item2.id, position: 1}] }
       end
 
       it "sets the flash error message" do
