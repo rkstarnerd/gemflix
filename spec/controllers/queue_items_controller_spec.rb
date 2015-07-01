@@ -161,10 +161,8 @@ describe QueueItemsController do
       end
     end
 
-    context "with unauthenticated users" do
-      it_behaves_like "requires sign in" do
-        let(:action) { post :update_queue, queue_items: [{id: 1, position: 2}, {id: 2, position: 1}] }
-      end
+    it_behaves_like "requires sign in" do
+      let(:action) { post :update_queue, queue_items: [{id: 1, position: 2}, {id: 2, position: 1}] }
     end
 
     context "with queue items that do not belong to the current user" do 
