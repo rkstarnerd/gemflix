@@ -17,21 +17,20 @@ describe QueueItemsController do
   end
 
   describe "POST create" do
+    let(:video)  { Fabricate(:video) }
+
     it_behaves_like "redirects to my_queue_path" do
-      let(:video)  { Fabricate(:video) }
       let(:action) { post :create, video_id: video.id }
     end
 
     it "creates queue_item" do
       set_current_user
-      video = Fabricate(:video)
       post :create, video_id: video.id
       expect(QueueItem.count).to eq(1)
     end
 
     it "it creates the queue item that is associated with the video" do
       set_current_user
-      video = Fabricate(:video)
       post :create, video_id: video.id
       expect(QueueItem.first.video).to eq(video)
     end
@@ -39,7 +38,6 @@ describe QueueItemsController do
     it "creates the queue item that is associated with the signed in user" do
       user = Fabricate(:user)
       set_current_user(user)
-      video = Fabricate(:video)
       post :create, video_id: video.id
       expect(QueueItem.first.user).to eq(user)
     end
@@ -47,7 +45,6 @@ describe QueueItemsController do
     it "puts the video as the last one in the queue" do
       user = Fabricate(:user)
       set_current_user(user)
-      video = Fabricate(:video)
       Fabricate(:queue_item, video: video, user: user)
       video2 = Fabricate(:video)
       post :create, video_id: video2.id
@@ -58,14 +55,12 @@ describe QueueItemsController do
     it "does not add the video to the queue if it is already in the queue" do
       user = Fabricate(:user)
       set_current_user(user)
-      video = Fabricate(:video)
       Fabricate(:queue_item, video: video, user: user)
       post :create, video_id: video.id
       expect(user.queue_items.count).to eq(1)
     end
 
     it_behaves_like "requires sign in" do
-      let(:video)  { video  = Fabricate(:video) }
       let(:action) { post :create, video_id: video.id }
     end
   end
