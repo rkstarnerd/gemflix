@@ -14,7 +14,7 @@
             = @video.description
           .actions
             = link_to "Watch Now", "#", method: :post, class: 'a btn btn-primary'
-            = link_to "+ My Queue", queue_items_path(video_id: @video.id), method: :post, class: 'a btn btn-default'
+            = link_to "+ My Queue", queue_items_path(video_id: @video.id), method: :post, class: 'a btn btn-default' unless @current_user.queued_video?(@video)
 %section.reviews.container
   %section.reviews.container
   .row
