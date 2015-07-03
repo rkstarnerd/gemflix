@@ -12,7 +12,7 @@ feature "user interacts with the queue" do
 
     #test link to add video to the queue
     add_video_to_queue(video1)
-    page.should have_content(video1.title)
+    expect_video_to_be_in_queue(video1)
 
     #test that "+ My Queue" button is not present if video is already in the queue
     visit video_path(video1)
@@ -38,6 +38,10 @@ feature "user interacts with the queue" do
     visit home_path
     find("a[href='/videos/#{video.id}']").click
     click_link "+ My Queue"
+  end
+
+  def expect_video_to_be_in_queue(video)
+    page.should have_content(video.title)
   end
 
   def set_video_position(video, position)
