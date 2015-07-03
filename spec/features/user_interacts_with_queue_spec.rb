@@ -8,13 +8,10 @@ feature "user interacts with the queue" do
     video3 = Fabricate(:video)
     assign_category_to_videos
     
-    #test video link
     user_signs_in
-    find("a[href='/videos/#{video1.id}']").click
-    page.should have_content(video1.title)
-    
+
     #test link to add video to the queue
-    click_link "+ My Queue"
+    add_video_to_queue(video1)
     page.should have_content(video1.title)
 
     #test that "+ My Queue" button is not present if video is already in the queue
