@@ -26,8 +26,7 @@ feature "user interacts with the queue" do
     set_video_position(video1, 3)
     set_video_position(video2, 1)
     set_video_position(video3, 2)
-
-    click_button "Update Instant Queue"
+    update_queue
 
     expect_video_position(video2, 1)
     expect_video_position(video3, 2)
@@ -48,6 +47,10 @@ feature "user interacts with the queue" do
     within(:xpath, "//tr[contains(.,'#{video.title}')]") do 
       fill_in "queue_items[][position]", with: "#{position}"
     end
+  end
+
+  def update_queue
+    click_button "Update Instant Queue"
   end
 
   def expect_video_position(video, position)
