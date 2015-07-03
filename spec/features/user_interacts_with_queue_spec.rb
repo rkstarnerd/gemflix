@@ -8,7 +8,7 @@ feature "user interacts with the queue" do
     video3 = Fabricate(:video)
     assign_category_to_videos
     
-    #test video links
+    #test video link
     user_signs_in
     find("a[href='/videos/#{video1.id}']").click
     page.should have_content(video1.title)
@@ -17,17 +17,13 @@ feature "user interacts with the queue" do
     click_link "+ My Queue"
     page.should have_content(video1.title)
 
-    #test that "+ My Queue" button is not there if video is already in the queue
+    #test that "+ My Queue" button is not present if video is already in the queue
     visit video_path(video1)
     page.should_not have_content "+ My Queue"
 
-    #test adding multiple videos to the queue
-    visit home_path
-    find("a[href='/videos/#{video2.id}']").click
-    click_link "+ My Queue"
-    visit home_path
-    find("a[href='/videos/#{video3.id}']").click
-    click_link "+ My Queue"
+    #add multiple videos to the queue
+    add_video_to_queue(video2)
+    add_video_to_queue(video3)
 
     #test reordering videos
     set_video_position(video1, 3)
@@ -39,6 +35,12 @@ feature "user interacts with the queue" do
     expect_video_position(video2, 1)
     expect_video_position(video3, 2)
     expect_video_position(video1, 3)
+  end
+
+  def add_video_to_queue(video)
+    visit home_path
+    find("a[href='/videos/#{video.id}']").click
+    click_link "+ My Queue"
   end
 
   def set_video_position(video, position)
