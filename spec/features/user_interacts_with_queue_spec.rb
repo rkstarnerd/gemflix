@@ -16,7 +16,7 @@ feature "user interacts with the queue" do
 
     #test that "+ My Queue" button is not present if video is already in the queue
     visit video_path(video1)
-    page.should_not have_content "+ My Queue"
+    expect_link_not_to_be_seen("+ My Queue")
 
     #add multiple videos to the queue
     add_video_to_queue(video2)
@@ -41,6 +41,10 @@ feature "user interacts with the queue" do
 
   def expect_video_to_be_in_queue(video)
     page.should have_content(video.title)
+  end
+
+  def expect_link_not_to_be_seen(link_text)
+    page.should_not have_content(link_text)
   end
 
   def set_video_position(video, position)
