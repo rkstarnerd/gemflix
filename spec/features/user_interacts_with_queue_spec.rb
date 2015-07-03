@@ -44,9 +44,12 @@ feature "user interacts with the queue" do
 
     click_button "Update Instant Queue"
 
-    expect(find(:xpath, "//tr[contains(.,'#{video2.title}')]//input[@type='text']").value).to eq("1")
-    expect(find(:xpath, "//tr[contains(.,'#{video3.title}')]//input[@type='text']").value).to eq("2")
-    expect(find(:xpath, "//tr[contains(.,'#{video1.title}')]//input[@type='text']").value).to eq("3")
-  end  
-end
+    expect_video_position(video2, 1)
+    expect_video_position(video3, 2)
+    expect_video_position(video1, 3)
+  end
 
+  def expect_video_position(video, position)
+    expect(find(:xpath, "//tr[contains(.,'#{video.title}')]//input[@type='text']").value).to eq("#{position}")
+  end
+end
