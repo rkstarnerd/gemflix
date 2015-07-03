@@ -30,13 +30,23 @@ feature "user interacts with the queue" do
     click_link "+ My Queue"
 
     #test reordering videos
-    find("input[data-video-id='#{video1.id}']").set(3)
-    find("input[data-video-id='#{video2.id}']").set(1)
-    find("input[data-video-id='#{video3.id}']").set(2)
+    within(:xpath, "//tr[contains(.,'#{video1.title}')]") do 
+      fill_in "queue_items[][position]", with: 3
+    end
+
+    within(:xpath, "//tr[contains(.,'#{video2.title}')]") do 
+      fill_in "queue_items[][position]", with: 1
+    end
+
+    within(:xpath, "//tr[contains(.,'#{video3.title}')]") do 
+      fill_in "queue_items[][position]", with: 2
+    end
+
     click_button "Update Instant Queue"
-    expect(find("input[data-video-id='#{video2.id}']").value).to eq("1")
-    expect(find("input[data-video-id='#{video3.id}']").value).to eq("2")
-    expect(find("input[data-video-id='#{video1.id}']").value).to eq("3")
+
+    expect(find(:xpath, "//tr[contains(.,'#{video2.title}')]//input[@type='text']").value).to eq("1")
+    expect(find(:xpath, "//tr[contains(.,'#{video3.title}')]//input[@type='text']").value).to eq("2")
+    expect(find(:xpath, "//tr[contains(.,'#{video1.title}')]//input[@type='text']").value).to eq("3")
   end  
 end
 
