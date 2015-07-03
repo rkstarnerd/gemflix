@@ -14,6 +14,7 @@ feature "user interacts with the queue" do
     click_link "+ My Queue"
     page.should have_content(video.title)
 
-  end
-  
+    visit video_path(video)
+    page.should_not have_content "+ My Queue"
+  end  
 end
