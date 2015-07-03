@@ -2,11 +2,8 @@ require 'spec_helper'
 
 feature "user signs in" do
   scenario "with valid email and password" do
-    visit signin_path
     user = Fabricate(:user)
-    fill_in "Email", with: user.email
-    fill_in "Password", with: user.password
-    click_button "Sign In"
+    user_signs_in(user)
     page.should have_content user.name
   end
 
