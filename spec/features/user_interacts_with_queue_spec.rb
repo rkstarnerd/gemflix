@@ -30,23 +30,21 @@ feature "user interacts with the queue" do
     click_link "+ My Queue"
 
     #test reordering videos
-    within(:xpath, "//tr[contains(.,'#{video1.title}')]") do 
-      fill_in "queue_items[][position]", with: 3
-    end
-
-    within(:xpath, "//tr[contains(.,'#{video2.title}')]") do 
-      fill_in "queue_items[][position]", with: 1
-    end
-
-    within(:xpath, "//tr[contains(.,'#{video3.title}')]") do 
-      fill_in "queue_items[][position]", with: 2
-    end
+    set_video_position(video1, 3)
+    set_video_position(video2, 1)
+    set_video_position(video3, 2)
 
     click_button "Update Instant Queue"
 
     expect_video_position(video2, 1)
     expect_video_position(video3, 2)
     expect_video_position(video1, 3)
+  end
+
+  def set_video_position(video, position)
+    within(:xpath, "//tr[contains(.,'#{video.title}')]") do 
+      fill_in "queue_items[][position]", with: "#{position}"
+    end
   end
 
   def expect_video_position(video, position)
