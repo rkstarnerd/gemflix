@@ -33,4 +33,12 @@ describe UsersController do
       end
     end
   end
+
+  describe "GET show" do
+    it "sets the @user variable" do
+      user = Fabricate(:user)
+      get :show, id: user.id
+      expect(assigns(:user)).to eq(user)
+    end
+  end
 end
