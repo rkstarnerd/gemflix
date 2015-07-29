@@ -11,7 +11,6 @@ gem 'jquery-rails'
 gem 'pg'
 gem 'bootstrap_form'
 gem 'bcrypt'
-gem 'bcrypt-ruby'
 gem 'fabrication', '~> 2.13.1'
 gem 'faker', '~> 1.4.3'
 
