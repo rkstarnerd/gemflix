@@ -7,6 +7,7 @@ describe User do
   it { should validate_uniqueness_of(:email)}
   it { should have_many(:queue_items).order(:position)}
   it { should have_many(:reviews).order(created_at: :desc) }
+  it { should have_many(:users_followed).class_name('User').with_foreign_key('followed_id') }
 
   describe "#queued_video?" do
     let(:user)  { Fabricate(:user) }
