@@ -39,6 +39,11 @@ describe UsersController do
       let(:action) { get :show, id: 3 }
     end
 
-    it "sets @user"
+    it "sets @user" do
+      set_current_user
+      user = Fabricate(:user)
+      get :show, id: user.id
+      expect(assigns(:user)).to eq(user)
+    end
   end
 end
