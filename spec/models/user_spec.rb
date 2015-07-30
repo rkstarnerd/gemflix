@@ -6,6 +6,7 @@ describe User do
   it { should validate_presence_of(:name)}
   it { should validate_uniqueness_of(:email)}
   it { should have_many(:queue_items).order(:position)}
+  it { should have_many(:reviews) }
 
   describe "#queued_video?" do
     let(:user)  { Fabricate(:user) }
