@@ -39,6 +39,6 @@ describe UsersController do
       let(:action) { get :show, id: 3 }
     end
 
-    it_"sets @user"
+    it "sets @user"
   end
 end
