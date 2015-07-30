@@ -13,12 +13,7 @@ class QueueItem < ActiveRecord::Base
 
   def rating=(new_rating)
     review
-    if review
-      review.update_column(:rating, new_rating)
-    else
-      review = Review.new(user: user, video: video, rating: new_rating)
-      review.save(validate: false)
-    end
+    update(review, new_rating)
   end
 
   def category_name
@@ -34,5 +29,18 @@ class QueueItem < ActiveRecord::Base
 
   def review
     @review ||= Review.where(user_id: user.id, video_id: video.id).first
+  end
+
+  def create_review(new_rating)
+    review = Review.new(user: user, video: video, rating: new_rating)
+    review.save(validate: false)
+  end
+
+  def update(review, new_rating)
+    if review
+      review.update_column(:rating, new_rating)
+    else
+      create_review(new_rating)
+    end
   end
 end
