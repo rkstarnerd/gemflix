@@ -35,10 +35,10 @@ describe UsersController do
   end
 
   describe "GET show" do
-    it "sets the @user variable" do
-      user = Fabricate(:user)
-      get :show, id: user.id
-      expect(assigns(:user)).to eq(user)
+    it_behaves_like "requires sign in" do
+      let(:action) { get :show, id: 3 }
     end
+
+    it_"sets @user"
   end
 end
