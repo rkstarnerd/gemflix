@@ -1,4 +1,4 @@
-class Relationships < ApplicationController
+class RelationshipsController < ApplicationController
   def index    
   end  
 end
