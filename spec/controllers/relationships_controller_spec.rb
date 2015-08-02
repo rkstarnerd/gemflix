@@ -6,7 +6,7 @@ describe RelationshipsController do
       alice = Fabricate(:user)
       set_current_user
       bob = Fabricate(:user)
-      relationship = Fabricate(:relationship, follwer: alice, leader: bob)
+      relationship = Fabricate(:relationship, follower: alice, leader: bob)
       get :index
       expect(assigns(:relationship)).to eq([relationship])
     end
