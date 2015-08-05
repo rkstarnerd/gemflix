@@ -12,13 +12,7 @@ class RelationshipsController < ApplicationController
 
   def create
     leader = User.find(params[:leader_id])
-    Relationship.create(leader_id: params[:leader_id], follower: current_user) unless current_user.follows? (leader)
+    Relationship.create(leader_id: params[:leader_id], follower: current_user) unless current_user.follows?(leader) || current_user == leader
     redirect_to people_path
-  end
-
-  private
-
-  def relationship_params
-    params.require(:relationship).permit(:leader_id)    
   end
 end
