@@ -73,7 +73,14 @@ describe RelationshipsController do
 
     
 
-    # it "does not create a relationship if the current user already follows the leader"
+    it "does not create a relationship if the current user already follows the leader" do
+      alice = Fabricate(:user)
+      set_current_user(alice)
+      bob = Fabricate(:user)
+      Fabricate(:relationship, leader: bob, follower, :alice)
+      post :create, leader_id: bob.id
+      expect(Relationship.count).to eq(1)
+    end
 
     # it "does not allow current user to follow themselves" do
     #   alice = Fabricate(:user)
