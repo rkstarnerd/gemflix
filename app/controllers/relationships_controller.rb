@@ -4,6 +4,9 @@ class RelationshipsController < ApplicationController
     @relationships = current_user.following_relationships
   end
 
-  def destroy    
+  def destroy
+    redirect_to people_path
+    # relationship = current_user.following_relationships.find
+    # relationship.destroy
   end
 end
