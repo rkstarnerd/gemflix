@@ -55,22 +55,23 @@ describe RelationshipsController do
       let(:action) { post :create }
     end
 
+    it "redirects to the people page" do
+      alice = Fabricate(:user)
+      set_current_user(alice)
+      bob = Fabricate(:user)
+      post :create, leader_id: bob.id
+      expect(response).to redirect_to people_path
+    end
+
     it "creates a relationship that the current user follows the leader" do
       alice = Fabricate(:user)
       set_current_user(alice)
       bob = Fabricate(:user)
       post :create, leader_id: bob.id
-      expect(Relationship.count).to eq(1)
+      expect(alice.following_relationships.first.leader).to eq(bob)
     end
 
-    # it "redirects to the people page" do
-    #   alice = Fabricate(:user)
-    #   set_current_user(alice)
-    #   bob = Fabricate(:user)
-    #   relationship = Fabricate(:relationship, follower: alice, leader: bob)
-    #   post :create, id: relationship
-    #   expect(response).to redirect_to people_path
-    # end
+    
 
     # it "does not create a relationship if the current user already follows the leader"
 
@@ -78,7 +79,7 @@ describe RelationshipsController do
     #   alice = Fabricate(:user)
     #   set_current_user(alice)
     #   relationship = Fabricate(:relationship, follower: alice, leader: alice)
-    #   post :create, id: relationship
+    #   post :create, leader_id: bob.id
     #   expect(Relationship.count).to eq(0)
     # end
   end
