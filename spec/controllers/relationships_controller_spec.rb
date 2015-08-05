@@ -15,14 +15,14 @@ describe RelationshipsController do
   it_behaves_like "requires sign in" do
     let(:action) { get :index }
   end
-end
 
-describe "DELETE destroy" do
-  it_behaves_like "requires sign in" do
-    let(:action) { delete :destroy, id: 4 }
+  describe "DELETE destroy" do
+    it_behaves_like "requires sign in" do
+      let(:action) { delete :destroy, id: 4 }
+    end
+
+    it "deletes the relationship if the current user is the follower" 
+    it "redirects to the people page"
+    it "does not delete the relationship if the current user is not the follower"
   end
-  
-  it "deletes the relationship if the current user is the follower" 
-  it "redirects to the people page"
-  it "does not delete the relationship if the current user is not the follower"
 end
