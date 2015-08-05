@@ -1,6 +1,9 @@
 class RelationshipsController < ApplicationController
-  before_filter :require_user, only: [:index]
+  before_filter :require_user, only: [:index, :destroy]
   def index
     @relationships = current_user.following_relationships
-  end  
+  end
+
+  def destroy    
+  end
 end
