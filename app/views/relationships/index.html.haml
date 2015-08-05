@@ -9,13 +9,13 @@
         %th(width="20%") Followers
         %th(width="30%") Unfollow
     %tbody
-      - @relationship.each do |relationship|
+      - @relationships.each do |relationship|
         %tr
           %td
             %img(src="http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest('#{relationship.leader.email.downcase}')}?s=40")
             = link_to "#{relationship.leader.name}"
           %td.extra-padding= relationship.leader.queue_items.count
           %td.extra-padding= relationship.leader.leading_relationships.count
-          %td.extra-padding= 
+          %td.extra-padding
             = link_to relationship, method: :delete do
               %i.glyphicon.glyphicon-remove
