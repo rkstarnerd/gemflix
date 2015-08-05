@@ -49,4 +49,19 @@ describe RelationshipsController do
       expect(Relationship.count).to eq(1)
     end
   end
+
+  describe "POST create" do
+    it_behaves_like "requires sign in" do
+      let(:action) { post :create }
+    end
+
+    # it "creates relationship" do
+    #   alice = Fabricate(:user)
+    #   set_current_user(alice)
+    #   bob = Fabricate(:user)
+    #   relationship = Fabricate(:relationship, follower: alice, leader: bob)
+    #   post :create, id: relationship
+    #   expect(Relationship.count).to eq(1)
+    # end
+  end
 end
