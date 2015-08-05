@@ -4,7 +4,7 @@
       %article
         %header
           %img(src="http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest('#{@user.email}'.downcase)}?s=40")
-          %h2 #{@user.name}'s video collections (8)
+          %h2 #{@user.name}'s video collections (#{@user.queue_items.count})
           = link_to "Follow", relationships_path(leader_id: @user.id, follower_id: @current_user.id), method: :post, class: 'a btn btn-default'
         %table.table
           %thead
