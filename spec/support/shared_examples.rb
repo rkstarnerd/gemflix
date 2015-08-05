@@ -11,5 +11,5 @@ shared_examples "redirects to my_queue_path" do
       set_current_user
       action
       expect(response).to redirect_to my_queue_path
-    end
+  end
 end
