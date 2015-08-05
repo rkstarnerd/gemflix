@@ -30,6 +30,11 @@ describe User do
       expect(alice.follows?(bob)).to be_truthy
     end
 
-    it "returns false if the user does not have a following relationship with another user"
+    it "returns false if the user does not have a following relationship with another user" do
+      alice = Fabricate(:user)
+      bob = Fabricate(:user)
+      Fabricate(:relationship, leader: charlie, follower: alice)
+      expect(alice.follows?(bob)).to be_falsey
+    end
   end
 end
