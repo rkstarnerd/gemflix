@@ -20,6 +20,6 @@ class User < ActiveRecord::Base
   end
 
   def follows?(another_user)
-    true
+    following_relationships.map(&:leader).include?(another_user)
   end
 end
