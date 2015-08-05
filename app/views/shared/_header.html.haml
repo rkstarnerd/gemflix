@@ -22,6 +22,7 @@
             %b.caret
           %ul.dropdown-menu(role="menu" aria-labelledby="dlabel")
             %li
+              = link_to "Profile", user_path(@current_user.id)
               %a(href="#") Account
               %a(href="#") Plan and Billing
               %a(href="/signout") Sign Out
