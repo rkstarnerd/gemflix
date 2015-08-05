@@ -39,6 +39,14 @@ describe RelationshipsController do
       expect(Relationship.count).to eq(0)
     end
 
-    it "does not delete the relationship if the current user is not the follower"
+    it "does not delete the relationship if the current user is not the follower" do
+      alice = Fabricate(:user)
+      set_current_user(alice)
+      bob = Fabricate(:user)
+      charlie = Fabricate(:user)
+      relationship = Fabricate(:relationship, follower: charlie, leader: bob)
+      delete :destroy, id: relationship
+      expect(Relationship.count).to eq(1)
+    end
   end
 end
