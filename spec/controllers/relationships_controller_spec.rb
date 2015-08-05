@@ -77,7 +77,7 @@ describe RelationshipsController do
       alice = Fabricate(:user)
       set_current_user(alice)
       bob = Fabricate(:user)
-      Fabricate(:relationship, leader: bob, follower, :alice)
+      Fabricate(:relationship, leader: bob, follower: alice)
       post :create, leader_id: bob.id
       expect(Relationship.count).to eq(1)
     end
