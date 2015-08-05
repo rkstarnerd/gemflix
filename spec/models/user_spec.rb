@@ -33,7 +33,6 @@ describe User do
     it "returns false if the user does not have a following relationship with another user" do
       alice = Fabricate(:user)
       bob = Fabricate(:user)
-      Fabricate(:relationship, leader: charlie, follower: alice)
       expect(alice.follows?(bob)).to be_falsey
     end
   end
