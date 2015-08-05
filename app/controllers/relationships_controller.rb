@@ -11,6 +11,13 @@ class RelationshipsController < ApplicationController
   end
 
   def create
+    Relationship.create(leader_id: params[:leader_id], follower: current_user)
     redirect_to people_path
+  end
+
+  private
+
+  def relationship_params
+    params.require(:relationship).permit(:leader_id)    
   end
 end
