@@ -6,7 +6,7 @@ feature 'User following' do
     bob = Fabricate(:user)
     category = Category.create(id: 1, name: "drama")
     video = Fabricate(:video)
-    assign_category_to_videos
+    assign_category_to_videos(category)
     Fabricate(:review, user: alice, video: video)
 
     user_signs_in(bob)

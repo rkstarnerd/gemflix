@@ -6,8 +6,8 @@ feature "user interacts with the queue" do
     video1 = Fabricate(:video)
     video2 = Fabricate(:video)
     video3 = Fabricate(:video)
-    assign_category_to_videos
-    
+    assign_category_to_videos(drama)
+
     user_signs_in
 
     #test link to add video to the queue
@@ -48,7 +48,7 @@ feature "user interacts with the queue" do
   end
 
   def set_video_position(video, position)
-    within(:xpath, "//tr[contains(.,'#{video.title}')]") do 
+    within(:xpath, "//tr[contains(.,'#{video.title}')]") do
       fill_in "queue_items[][position]", with: "#{position}"
     end
   end

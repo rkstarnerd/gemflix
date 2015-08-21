@@ -26,9 +26,9 @@ def create_video
   Video.create(title: "foo", description: "bar")
 end
 
-def assign_category_to_videos
+def assign_category_to_videos(category)
   Video.all.each do |video|
-    VideoCategory.create(video_id: video.id, category_id: 1)
+    VideoCategory.create(video_id: video.id, category_id: category.id)
   end
 end
 
