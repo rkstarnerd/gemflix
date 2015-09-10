@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :require_user, only: [:show]
-  
+
   def new
     @user = User.new
 
@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
+      AppMailer.send_welcome_email(@user).deliver
       redirect_to signin_path
     else
       render 'new'
