@@ -19,6 +19,23 @@ describe UsersController do
       it { should redirect_to signin_path }
     end
 
+    context "email sending" do
+      it "sends out the email" do
+        post :create, user: Fabricate.attributes_for(:user)
+        ActionMailer::Base.deliveries.should_not be_empty
+      end
+
+      it "sends to the right recipient" do
+        post :create, user: {email: "email@example.com", password: "password", name: "name"}
+        message = ActionMailer::Base.deliveries.last
+        message.body.should include("Welcome to GemFLiX")
+      end
+
+      it "has the right content" do
+        post :create, user: Fabricate.attributes_for(:user)
+      end
+    end
+
     context "with invalid input" do
       before { post :create, user: {email: "gemille@example.com"} }
 
@@ -27,7 +44,7 @@ describe UsersController do
       end
 
       it { should render_template('new') }
-      
+
       it "sets @user" do
         expect(assigns(:user)).to be_instance_of(User)
       end
