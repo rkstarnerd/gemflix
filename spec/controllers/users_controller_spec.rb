@@ -20,7 +20,9 @@ describe UsersController do
     end
 
     context "email sending" do
-      it "sends out the email" do
+      after { ActionMailer::Base.deliveries.clear }
+
+      it "sends out the email with valid inputs" do
         post :create, user: Fabricate.attributes_for(:user)
         ActionMailer::Base.deliveries.should_not be_empty
       end
@@ -33,6 +35,11 @@ describe UsersController do
 
       it "has the right content" do
         post :create, user: Fabricate.attributes_for(:user)
+      end
+
+      it "does not send out email with invalid inputs" do
+        post :create, user: {email: "gemille@example.com"}
+        ActionMailer::Base.deliveries.should be_empty
       end
     end
 
