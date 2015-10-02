@@ -10,7 +10,9 @@
         %fieldset.actions.control-group.col-sm-offset-2
           .controls
             = f.submit "Sign In"
-        %p.sign_up
+            %p.sign_up
+          .col-sm-offset-2
+            = link_to "(Forgot your password?)", forgot_password_path
         %br
           Don't have an account yet?
           = link_to "Sign Up!", register_path
